@@ -21,8 +21,8 @@ Het datamodel:
   - Achternaam
   - Adresgegevens
   - 0 of meerdere contactgegevens
-  - Type (Email/GSM)
-  - Waarde
+    - Type (Email/GSM)
+    - Waarde
   
 - Factuur:
 
@@ -31,6 +31,6 @@ Het datamodel:
   - Klant
   - Totaalbedrag
   - 1 of meerdere factuurlijnen
-  - Aantal
-  - Prijs per eenheid
-  - Totaalprijs
+    - Aantal
+    - Prijs per eenheid
+    - Totaalprijs
