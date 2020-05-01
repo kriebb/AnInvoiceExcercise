@@ -36,9 +36,9 @@ namespace ASimpleCRMInvoiceExcercise.Tests
             [Fact]
             public void Address()
             {
-                var bogusPersonAdress = $"{_bogusPerson.Address.Street} , {_bogusPerson.Address.ZipCode} {_bogusPerson.Address.City}, {_bogusPerson.Address.State}";
-                _customer.Address = bogusPersonAdress;
-                Assert.Equal(bogusPersonAdress, _customer.Address);
+
+                _customer.Address = new Address();
+                Assert.Equal(new Address(),_customer.Address);
             }
 
             [Fact]
