@@ -9,15 +9,16 @@ namespace ASimpleCRMInvoiceExcercise.Tests
 {
     public class GivenACustomer
     {
-        public class ShouldDefineA
+        private Customer _customer;
+        private Person _bogusPerson;
+
+        public GivenACustomer()
         {
-            public ShouldDefineA()
-            {
-                _bogusPerson = new Bogus.Person();
-                _customer = new Customer();
-            }
-            private Customer _customer;
-            private Person _bogusPerson;
+            _bogusPerson = new Bogus.Person();
+            _customer = new Customer();
+        }
+        public class ShouldDefineA:GivenACustomer
+        {
 
             [Fact]
             public void FirstName()
@@ -48,14 +49,8 @@ namespace ASimpleCRMInvoiceExcercise.Tests
             }
         }
 
-        public class ShouldBeAbleTo
+        public class ShouldBeAbleTo:GivenACustomer
         {
-            private Customer _customer;
-
-            public ShouldBeAbleTo()
-            {
-                _customer = new Customer();
-            }
             [Fact]
             public void HaveNoContacts()
             {

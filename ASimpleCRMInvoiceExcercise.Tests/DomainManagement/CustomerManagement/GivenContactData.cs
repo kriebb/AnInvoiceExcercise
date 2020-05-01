@@ -5,13 +5,18 @@ namespace ASimpleCRMInvoiceExcercise.Tests
 {
     public class GivenContactData
     {
-        public class ShouldDefine
+        private ContactInfo _contactInfo;
+
+        public GivenContactData()
         {
-            private ContactInfo _contactInfo;
+            _contactInfo = new ContactInfo(); 
+        }
+        public class ShouldDefine:GivenContactData
+        {
 
             public ShouldDefine()
             {
-                _contactInfo = new ContactInfo();
+
 
             }
             [Fact]
