@@ -9,7 +9,6 @@ namespace Backend.API.InvoiceManagement
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<ErrorService>().As<IErrorService>();
         }
     }
 }

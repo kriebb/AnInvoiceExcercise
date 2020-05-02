@@ -34,7 +34,7 @@ namespace Backend.API.Infrastructure.Mappings.BootstrapAutoMapper
             var assembliesTypes = assemblyTypes.Where(p => typeof(Profile).IsAssignableFrom(p) && !p.IsAbstract)
                 .Distinct();
 
-            var profiles = assembliesTypes
+            var profiles = assembliesTypes.Where(x => x.GetConstructors().Any(constructorInfo => !constructorInfo.GetParameters().Any()))
                 .Select(p => (Profile)Activator.CreateInstance(p)).ToList();
 
             mce.AddProfiles(profiles);

@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿
 using AutoMapper;
 using Backend.API.Domain.CustomerManagement;
 using Backend.API.Dtos.CustomerManagement;
 
-namespace Backend.API.CustomerManagement.MappingMangement
+namespace Backend.API.CustomerManagement.MappingManagement
 {
-    public class CustomerMapper:Profile
+    public class CustomerMapper : Profile
     {
         public CustomerMapper()
         {
-            CreateMap<Customer, CustomerDto>();
+            CreateMap<CustomerItem, Customer>()
+                .ForMember(x => x.Address, x => x.Ignore())
+                .ForMember(x => x.Contacts, x => x.Ignore());
         }
     }
 }

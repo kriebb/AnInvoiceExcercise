@@ -1,14 +1,9 @@
 ﻿using System;
 using Bogus;
-using Value;
 using Xunit;
 
 namespace Backend.API.Tests.Backend.API.Domain.Infrastructure.EntityManagement
 {
-    public class SomeValueObject : ValueObject
-    {
-        public string SomeProperty { get; set; }
-    }
     public class GivenValueObject
     {
         private SomeValueObject _instance1;

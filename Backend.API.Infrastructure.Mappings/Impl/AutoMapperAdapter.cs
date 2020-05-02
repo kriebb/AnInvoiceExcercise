@@ -16,11 +16,6 @@ namespace Backend.API.Infrastructure.Mappings.Impl
             return _mapper.Map<TSource, TDestination>(source);
         }
 
-        public TSource Map(TDestination source)
-        {
-            return _mapper.Map<TDestination, TSource>(source);
-        }
-
         public IEnumerable<TDestination> MapMany(IEnumerable<TSource> sources)
         {
             return _mapper.Map<IEnumerable<TSource>, IEnumerable<TDestination>>(sources);

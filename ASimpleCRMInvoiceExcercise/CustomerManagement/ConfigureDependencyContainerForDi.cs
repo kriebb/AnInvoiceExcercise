@@ -9,7 +9,7 @@ namespace Backend.API.CustomerManagement
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<ErrorService>().As<IErrorService>();
+            
         }
     }
 }

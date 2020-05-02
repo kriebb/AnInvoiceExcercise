@@ -1,14 +1,9 @@
 ﻿using System;
-using Backend.API.Domain.Infrastructure.EntityMangement;
 using Bogus;
 using Xunit;
 
 namespace Backend.API.Tests.Backend.API.Domain.Infrastructure.EntityManagement
 {
-    public class SomeEntity : Entity
-    {
-        public string SomeProperty { get; set; }
-    }
     public class GivenSomeEntity
     {
         private readonly SomeEntity _someEntity1;
@@ -30,7 +25,7 @@ namespace Backend.API.Tests.Backend.API.Domain.Infrastructure.EntityManagement
         [Fact]
         public void WhenInstance1_Instance2_HaveSameId_ShouldBeEqual()
         {
-            var someId = new Faker().Random.Number(1);
+            var someId = new Faker().Random.Number(1,int.MaxValue);
             _someEntity1.Id = someId;
             _someEntity2.Id = someId;
 

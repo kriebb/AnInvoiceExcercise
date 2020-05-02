@@ -19,9 +19,9 @@ namespace Backend.API.Domain.CustomerManagement
             _contacts.Clear();
         }
 
-        public void AddContact(ContactInfo contactInfo)
+        public bool AddContact(ContactInfo contactInfo)
         {
-            _contacts.Add(contactInfo);
+            return _contacts.Add(contactInfo);
         }
 
         public void RemoveContact(ContactInfo contactInfo)
