@@ -1,6 +1,6 @@
 using Value;
 
-namespace ASimpleCRMInvoiceExcercise.Tests
+namespace Backend.API.Domain.CustomerManagement
 {
     public class ContactInfo : ValueObject
     {

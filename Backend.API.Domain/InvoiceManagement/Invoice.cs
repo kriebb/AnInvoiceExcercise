@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
-using EntityManagement;
+using Backend.API.Domain.CustomerManagement;
+using Backend.API.Domain.Infrastructure.EntityMangement;
 
-namespace ASimpleCRMInvoiceExcercise.Tests
+namespace Backend.API.Domain.InvoiceManagement
 {
     public class Invoice:Entity
     {

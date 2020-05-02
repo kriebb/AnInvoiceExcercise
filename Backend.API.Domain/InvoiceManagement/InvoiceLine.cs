@@ -1,6 +1,6 @@
-using EntityManagement;
+using Backend.API.Domain.Infrastructure.EntityMangement;
 
-namespace ASimpleCRMInvoiceExcercise.Tests
+namespace Backend.API.Domain.InvoiceManagement
 {
     public class InvoiceLine:Entity
     {

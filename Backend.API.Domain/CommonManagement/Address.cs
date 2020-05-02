@@ -1,6 +1,6 @@
 using Value;
 
-namespace ASimpleCRMInvoiceExcercise.Tests
+namespace Backend.API.Domain.CommonManagement
 {
     public class Address:ValueObject
     {
