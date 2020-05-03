@@ -3,7 +3,7 @@ using Backend.API.Domain.CustomerManagement;
 using Backend.API.Domain.InvoiceManagement;
 using Backend.API.Dtos.InvoiceManagement;
 
-namespace Backend.API.CustomerManagement.MappingMangement
+namespace Backend.API.InvoiceManagement.MappingMangement
 {
     public class InvoiceItemMapper : Profile
     {

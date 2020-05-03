@@ -1,8 +1,8 @@
-﻿using Backend.API.CustomerManagement.MappingMangement;
-using Backend.API.Domain.CustomerManagement;
+﻿using Backend.API.Domain.CustomerManagement;
 using Backend.API.Dtos.CustomerManagement;
 using Backend.API.Infrastructure.Mappings;
 using Backend.API.Infrastructure.Mappings.BootstrapAutoMapper;
+using Backend.API.Tests.Backend.API.InvoiceManagement;
 using Bogus;
 using FluentAssertions;
 using FluentAssertions.Execution;
@@ -32,10 +32,8 @@ namespace Backend.API.Tests.Backend.API.CustomerManagement
         {
             var faker = new Faker();
 
-            var entity = new Customer();
-            entity.FirstName = faker.Person.FirstName;
-            entity.LastName = faker.Person.LastName;
-            entity.Id = faker.Random.Number(1, int.MaxValue);
+
+            var entity = Generator.CustomerGenerator().Generate();
 
             var item = _sut.Map(entity);
 

@@ -4,11 +4,11 @@ using Backend.API.Dtos.CustomerManagement;
 
 namespace Backend.API.CustomerManagement.MappingMangement
 {
-    public class CustomerItemMapper : Profile
+    public class ContactItemMapper : Profile
     {
-        public CustomerItemMapper()
+        public ContactItemMapper()
         {
-            CreateMap<Customer, CustomerItem>();
+            CreateMap<ContactInfo, ContactInfoItem>();
         }
     }
 }

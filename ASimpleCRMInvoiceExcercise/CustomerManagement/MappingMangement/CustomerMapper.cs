@@ -1,9 +1,8 @@
-﻿
-using AutoMapper;
+﻿using AutoMapper;
 using Backend.API.Domain.CustomerManagement;
 using Backend.API.Dtos.CustomerManagement;
 
-namespace Backend.API.CustomerManagement.MappingManagement
+namespace Backend.API.CustomerManagement.MappingMangement
 {
     public class CustomerMapper : Profile
     {

@@ -1,6 +1,7 @@
 ﻿using Backend.API.Domain.CommonManagement;
 using Backend.API.Domain.CustomerManagement;
 using Backend.API.Domain.InvoiceManagement;
+using Backend.API.Dtos.CustomerManagement;
 using Backend.API.Dtos.InvoiceManagement;
 using Bogus;
 using Bogus.Extensions;
@@ -23,24 +24,7 @@ namespace Backend.API.Tests.Backend.API.InvoiceManagement
 
         public static Faker<Invoice> InvoiceGenerator()
         {
-            var fakeContactGenerator = new Faker<ContactInfo>();
-            fakeContactGenerator.RuleFor(x => x.Type,
-                    f => f.PickRandomParam(ContactInfo.CellNumber, ContactInfo.CellNumber))
-                .RuleFor(x => x.Value, f => f.PickRandomParam(f.Phone.PhoneNumber(), f.Internet.Email()));
-
-            var fakeAddressGenerator = new Faker<Address>();
-
-            var fakeCustomerGenerator = new Faker<Customer>();
-            fakeCustomerGenerator
-                .RuleFor(z => z.FirstName, f => f.Person.FirstName)
-                .RuleFor(z => z.LastName, f => f.Person.LastName)
-                .RuleFor(z => z.Id, f => f.IndexFaker++)
-                .RuleFor(z => z.Address, fakeAddressGenerator.Generate())
-                .FinishWith(((faker, customer) =>
-                {
-                    foreach (var contactInfo in fakeContactGenerator.GenerateBetween(0, 4))
-                        customer.AddContact(contactInfo);
-                }));
+            var fakeCustomerGenerator = CustomerGenerator();
 
 
             var fakeInvoiceLineGenerator = new Faker<InvoiceLine>();
@@ -60,6 +44,57 @@ namespace Backend.API.Tests.Backend.API.InvoiceManagement
                 }));
 
             return fakeInvoiceGenerator;
+        }
+
+        public static Faker<Customer> CustomerGenerator()
+        {
+            var fakeContactGenerator = ContactInfoGenerator();
+
+            var fakeAddressGenerator = new Faker<Address>();
+
+            var fakeCustomerGenerator = new Faker<Customer>();
+            fakeCustomerGenerator
+                .RuleFor(z => z.FirstName, f => f.Person.FirstName)
+                .RuleFor(z => z.LastName, f => f.Person.LastName)
+                .RuleFor(z => z.Id, f => f.Random.Number(1,int.MaxValue))
+                .RuleFor(z => z.Address, fakeAddressGenerator.Generate())
+                .FinishWith(((faker, customer) =>
+                {
+                    foreach (var contactInfo in fakeContactGenerator.GenerateBetween(0, 4))
+                        customer.AddContact(contactInfo);
+                }));
+            return fakeCustomerGenerator;
+        }
+
+        public static Faker<ContactInfo> ContactInfoGenerator()
+        {
+            var fakeContactGenerator = new Faker<ContactInfo>();
+            fakeContactGenerator.RuleFor(x => x.Type,
+                    f => f.PickRandomParam(ContactInfo.CellNumber, ContactInfo.CellNumber))
+                .RuleFor(x => x.Value, f => f.PickRandomParam(f.Phone.PhoneNumber(), f.Internet.Email()));
+
+            return fakeContactGenerator;
+        }
+
+        public static Faker<ContactInfoItem> ContactInfoItemGenerator()
+        {
+            var fakeContactGenerator = new Faker<ContactInfoItem>();
+            fakeContactGenerator.RuleFor(x => x.Type,
+                    f => f.PickRandomParam(ContactInfo.CellNumber, ContactInfo.CellNumber))
+                .RuleFor(x => x.Value, f => f.PickRandomParam(f.Phone.PhoneNumber(), f.Internet.Email()));
+
+            return fakeContactGenerator;
+        }
+
+        public static Faker<CustomerItem> CustomerItemGenerator()
+        {
+            var fakeCustomerGenerator = new Faker<CustomerItem>();
+            fakeCustomerGenerator
+                .RuleFor(z => z.FirstName, f => f.Person.FirstName)
+                .RuleFor(z => z.LastName, f => f.Person.LastName)
+                .RuleFor(z => z.Id, f => f.Random.Number(1, int.MaxValue));
+
+            return fakeCustomerGenerator;
         }
     }
 }

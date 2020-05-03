@@ -59,7 +59,7 @@ namespace Backend.API.CustomerManagement
         // POST: api/Customer - Een contactgegeven (email/telefoon) toe te wijzen aan een klant
 
         [HttpPut]
-        public async Task<ActionResult> Put(long customerId, [FromBody] ContactInfoItem value)
+        public async Task<ActionResult<CustomerItem>> Put(long customerId, [FromBody] ContactInfoItem value)
         {
             try
             {
