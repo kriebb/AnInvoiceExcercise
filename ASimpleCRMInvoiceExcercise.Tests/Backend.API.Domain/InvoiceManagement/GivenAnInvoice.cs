@@ -97,12 +97,12 @@ namespace Backend.API.Tests.Backend.API.Domain.InvoiceManagement
                 _invoice.ClearInvoiceLines();
                 _invoice.AddInvoiceLine(invoiceLine);
 
-                Assert.Equal(1, _invoice.Lines.Count());
+                Assert.Single(_invoice.Lines);
 
 
                 _invoice.RemoveInvoiceLines(invoiceLine);
 
-                Assert.Equal(0, _invoice.Lines.Count());
+                Assert.Empty(_invoice.Lines);
             }
         }
 

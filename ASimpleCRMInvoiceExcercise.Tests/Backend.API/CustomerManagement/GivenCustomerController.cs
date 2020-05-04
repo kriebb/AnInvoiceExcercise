@@ -106,7 +106,7 @@ namespace Backend.API.Tests.Backend.API.CustomerManagement
         }
 
         [Fact]
-        public async Task WhenAddingCOntactInfoToNonExistingCustomer_ShouldReturnNotFound()
+        public async Task WhenAddingContactInfoToNonExistingCustomer_ShouldReturnNotFound()
         {
             var contactInfoItem = Generator.ContactInfoItemGenerator();
             var apiResult = await _sut.Put(_notExistingId, contactInfoItem);

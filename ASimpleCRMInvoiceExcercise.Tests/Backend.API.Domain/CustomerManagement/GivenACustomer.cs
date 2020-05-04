@@ -84,12 +84,12 @@ namespace Backend.API.Tests.Backend.API.Domain.CustomerManagement
                 _customer.ClearContacts();
                 _customer.AddContact(contactInfo);
 
-                Assert.Equal(1, _customer.Contacts.Count());
+                Assert.Single(_customer.Contacts);
 
 
                 _customer.RemoveContact(contactInfo);
 
-                Assert.Equal(0, _customer.Contacts.Count());
+                Assert.Empty(_customer.Contacts);
 
 
             }
