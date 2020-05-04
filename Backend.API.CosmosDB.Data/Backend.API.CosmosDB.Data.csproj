@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Azure.DocumentDB.Core" Version="2.10.3" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="5.0.0-preview.3.20215.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Backend.API.Infrastructure.DI\Backend.API.Infrastructure.DI.csproj" />
+    <ProjectReference Include="..\Backend.API.Infrastructure.Mappings\Backend.API.Infrastructure.Mappings.csproj" />
+    <ProjectReference Include="..\Bakcend.API.Domain.Services\Backend.API.Domain.Services.csproj" />
+  </ItemGroup>
+
+</Project>

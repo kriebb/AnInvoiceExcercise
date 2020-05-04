@@ -5,8 +5,8 @@ namespace Backend.API.Domain.Services.CustomerManagement
 {
     public interface ICustomerRepository
     {
-        Task AddAsync(Customer newCustomer);
-        Task<Customer> GetAsync(long customerId);
-        Task UpdateAsync(Customer existingCustomer);
+        Task< Domain.CustomerManagement.Customer> AddAsync( Domain.CustomerManagement.Customer newDomainCustomer);
+        Domain.CustomerManagement.Customer Get(long customerId);
+        Task< Domain.CustomerManagement.Customer> UpdateAsync( Domain.CustomerManagement.Customer existingDomainCustomer);
     }
 }

@@ -79,7 +79,7 @@ namespace Backend.API.Tests.Backend.API.InvoiceManagement
         public async Task UpdatingAnInvoiceState_ShouldBeAddedToTheSummary()
         {
             var invoice = Generator.InvoiceGenerator().Generate();
-            _invoiceRepository.GetAsync(invoice.Id).Returns(invoice);
+            _invoiceRepository.Get(invoice.Id).Returns(invoice);
 
             var apiResult = await _sut.Put(invoice.Id, "someState");
 
@@ -94,7 +94,7 @@ namespace Backend.API.Tests.Backend.API.InvoiceManagement
         public async Task UpdatingAnInvoiceStateAsNull_StringEmpty_WhiteSpace_ShouldReturnBadRequest(string emptyStatus)
         {
             var invoice = Generator.InvoiceGenerator().Generate();
-            _invoiceRepository.GetAsync(invoice.Id).Returns(invoice);
+            _invoiceRepository.Get(invoice.Id).Returns(invoice);
 
             var apiResult = await _sut.Put(invoice.Id, emptyStatus);
 

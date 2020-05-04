@@ -28,6 +28,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ASimpleCRMInvoiceExcercise\Backend.API.csproj" />
+    <ProjectReference Include="..\Backend.API.Data.Generator\Backend.API.Data.Generator.csproj" />
     <ProjectReference Include="..\Backend.API.Domain\Backend.API.Domain.csproj" />
   </ItemGroup>
 

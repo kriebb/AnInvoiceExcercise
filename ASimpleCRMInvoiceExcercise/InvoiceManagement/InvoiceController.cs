@@ -60,7 +60,7 @@ namespace Backend.API.InvoiceManagement
                     return new BadRequestResult();
 
                 //TODO: "We should talk about the state of an invoice; It' wasn't in the exercise... So what is this state exactly?"
-                var invoice = await _invoiceRepository.GetAsync(id);
+                var invoice =  _invoiceRepository.Get(id);
                 invoice.Summary += "State Added: " + invoiceState + System.Environment.NewLine;
 
                 await _invoiceRepository.UpdateAsync(invoice);

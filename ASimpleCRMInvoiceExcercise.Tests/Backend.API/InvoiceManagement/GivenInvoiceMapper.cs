@@ -1,6 +1,4 @@
-﻿using Autofac.Features.GeneratedFactories;
-using Backend.API.Domain.InvoiceManagement;
-using Backend.API.Dtos.CustomerManagement;
+﻿using Backend.API.Domain.InvoiceManagement;
 using Backend.API.Dtos.InvoiceManagement;
 using Backend.API.Infrastructure.Mappings;
 using Backend.API.Infrastructure.Mappings.BootstrapAutoMapper;

@@ -5,8 +5,8 @@ namespace Backend.API.Domain.Services.InvoiceManagement
 {
     public interface IInvoiceRepository
     {
-        Task AddAsync(Invoice invoice);
-        Task<Invoice> GetAsync(long id);
-        Task UpdateAsync(Invoice invoice);
+        Task<Invoice> AddAsync(Invoice invoice);
+        Invoice Get(long invoiceId);
+        Task<Invoice> UpdateAsync(Invoice invoice);
     }
 }

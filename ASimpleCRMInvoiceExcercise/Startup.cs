@@ -34,6 +34,7 @@ namespace Backend.API
         public void ConfigureContainer(ContainerBuilder builder)
         {
             var assemblies = GetAllAssemblies();
+            builder.RegisterInstance<IConfiguration>(Configuration);
 
             builder.RegisterAssemblyModules(assemblies);
             builder.RegisterAutoMapper(assemblies);

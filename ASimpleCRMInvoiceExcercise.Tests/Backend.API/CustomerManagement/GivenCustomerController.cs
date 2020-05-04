@@ -52,8 +52,8 @@ namespace Backend.API.Tests.Backend.API.CustomerManagement
             repo.Add(_existingId, customer);
 
 
-            customerRepository.GetAsync(0).Returns(Task.FromResult(null as Customer));
-            customerRepository.GetAsync(customer.Id).Returns(Task.FromResult(repo[customer.Id]));
+            customerRepository.Get(0).Returns(null as Customer);
+            customerRepository.Get(customer.Id).Returns(repo[customer.Id]);
             customerRepository
                 .When(cr =>cr.UpdateAsync(Arg.Any<Customer>()))
                 .Do(callInfo =>

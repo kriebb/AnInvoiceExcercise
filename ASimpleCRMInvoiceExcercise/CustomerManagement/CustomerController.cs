@@ -67,7 +67,7 @@ namespace Backend.API.CustomerManagement
                     return new BadRequestResult();
 
                 var contact = _contactMapper.Map(value);
-                var customer = await _customerRepository.GetAsync(customerId);
+                var customer = _customerRepository.Get(customerId);
                 if (customer == null)
                     return new NotFoundResult();
 
