@@ -1,7 +1,9 @@
-﻿namespace Backend.API.Domain.Infrastructure.EntityMangement
+﻿using System;
+
+namespace Backend.API.Domain.Infrastructure.EntityManagement
 {
     public interface IEntity
     {
-        long Id { get; }
+        Guid Id { get; }
     }
 }

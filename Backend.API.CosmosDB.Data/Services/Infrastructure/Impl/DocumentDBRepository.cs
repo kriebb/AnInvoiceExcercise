@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
+using Newtonsoft.Json;
 
 namespace Backend.API.CosmosDB.Data.Services.Infrastructure.Impl
 {
+    //https://github.com/Azure/azure-cosmos-dotnet-v2/blob/master/samples/code-samples/DocumentManagement/Program.cs#L154
     internal class DocumentDbRepository<T> : IDocumentDbRepository<T> where T:Document
     {
         private readonly CosmosDbConfig _cosmosDbConfig;
@@ -24,7 +27,7 @@ namespace Backend.API.CosmosDB.Data.Services.Infrastructure.Impl
                 .FirstOrDefault();
         }
 
-        public T GetById(long id)
+        public T GetById(string id)
         {
             T doc = Client.CreateDocumentQuery<T>(Collection.SelfLink)
                 .Where(d => d.Id == id.ToString())
@@ -45,22 +48,22 @@ namespace Backend.API.CosmosDB.Data.Services.Infrastructure.Impl
 
         public async Task<T> CreateAsync(T entity)
         {
-            Document doc = await Client.CreateDocumentAsync(Collection.SelfLink, entity);
-            T ret = (T)(dynamic)doc;
-            return ret;
+
+            ResourceResponse<Document> doc = await Client.CreateDocumentAsync(
+                Collection.SelfLink,
+                entity);
+            return (T)(dynamic)doc.Resource;
         }
 
         public async Task<T> UpdateAsync(string id, T entity)
         {
-            if (!long.TryParse(id, out var longId))
-            {
-                throw new ArgumentException(nameof(id),$"Couldn't parse Id to Long from entity {typeof(T).FullName}. Value was {id}");
-            }
-            T doc = GetById(longId);
-            return (T)await Client.ReplaceDocumentAsync(doc.SelfLink, entity);
+            //https://azure.microsoft.com/en-us/blog/documentdb-adds-upsert/
+            //https://stackoverflow.com/questions/27118998/converting-created-document-result-to-poco
+            var response = await Client.UpsertDocumentAsync(Collection.SelfLink, entity);
+            return (T)(dynamic)response.Resource;
         }
 
-        public async Task DeleteAsync(long id)
+        public async Task DeleteAsync(string id)
         {
             T doc = GetById(id);
             await Client.DeleteDocumentAsync(doc.SelfLink);
@@ -81,20 +84,7 @@ namespace Backend.API.CosmosDB.Data.Services.Infrastructure.Impl
             }
         }
 
-        private string _collectionId;
-        public String CollectionId
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(_collectionId))
-                {
-
-                    _collectionId = _cosmosDbConfig.CollectionId;
-                }
-
-                return _collectionId;
-            }
-        }
+        public String CollectionId => typeof(T).Name;
 
         private Database _database;
         private Database Database
@@ -138,7 +128,7 @@ namespace Backend.API.CosmosDB.Data.Services.Infrastructure.Impl
                     //the UserAgentSuffix on the ConnectionPolicy is being used to enable internal tracking metrics
                     //this is not requirted when connecting to DocumentDB but could be useful if you, like us, want to run 
                     //some monitoring tools to track usage by application
-                    ConnectionPolicy connectionPolicy = new ConnectionPolicy { UserAgentSuffix = "crmclientinvoiceapp/1" };
+                    ConnectionPolicy connectionPolicy = new ConnectionPolicy { UserAgentSuffix = "crmclientinvoiceapp_1" };
 
                     _client = new DocumentClient(new Uri(endpoint), authKey, connectionPolicy);
                 }
@@ -176,6 +166,18 @@ namespace Backend.API.CosmosDB.Data.Services.Infrastructure.Impl
             }
 
             return db;
+        }
+
+        public static async Task<T> ReadAsAsync<T>(Document d)
+        {
+            using (var ms = new MemoryStream())
+            using (var reader = new StreamReader(ms))
+            {
+                d.SaveTo(ms);
+                ms.Position = 0;
+                var stream = await reader.ReadToEndAsync();
+                return JsonConvert.DeserializeObject<T>(stream);
+            }
         }
     }
 }

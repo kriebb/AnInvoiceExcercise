@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace Backend.API.CosmosDB.Data.Services.CustomerManagement
+namespace Backend.API.CosmosDB.Data.Services.CommonManagement.Mappers
 {
     internal class DataAddressMapper : Profile
     {

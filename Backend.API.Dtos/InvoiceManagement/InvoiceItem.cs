@@ -8,9 +8,10 @@ namespace Backend.API.Dtos.InvoiceManagement
     {
         public string Summary { get; set; }
         public DateTime Date { get; set; }
-        public long CustomerId { get; set; }
+        public Guid CustomerId { get; set; }
         public int TotalAmount { get; set; }
-        public long Id { get; set; }
-    }
+        public Guid Id { get; set; }
 
+        public InvoiceLineItem[] Lines { get; set; }
+    }
 }

@@ -7,9 +7,11 @@ using AutoFixture;
 using AutoFixture.AutoNSubstitute;
 using AutoFixture.Kernel;
 using Backend.API.CustomerManagement;
+using Backend.API.Data.Generator;
 using Backend.API.Domain.CustomerManagement;
 using Backend.API.Domain.Services.CustomerManagement;
 using Backend.API.Dtos.CustomerManagement;
+using Backend.API.Dtos.InvoiceManagement;
 using Backend.API.ErrorManagement;
 using Backend.API.ErrorManagement.Impl;
 using Backend.API.Infrastructure.Mappings;
@@ -32,8 +34,8 @@ namespace Backend.API.Tests.Backend.API.CustomerManagement
     public class GivenCustomerController
     {
         private CustomerController _sut;
-        private long _notExistingId;
-        private long _existingId;
+        private Guid _notExistingId;
+        private Guid _existingId;
 
         public GivenCustomerController()
         {
@@ -43,27 +45,27 @@ namespace Backend.API.Tests.Backend.API.CustomerManagement
             var customerRepository = Substitute.For<ICustomerRepository>(); //maybe forse a dictionary implementation instead of an inline mock
 
 
-            _notExistingId = 0;
-            var customer = Generator.CustomerGenerator().Generate();
+            _notExistingId = Guid.Empty;
+            var customer = DomainGenerator.CustomerGenerator().Generate();
             _existingId = customer.Id;
 
-            Dictionary<long, Customer> repo = new Dictionary<long, Customer>();
+            Dictionary<Guid, Customer> repo = new Dictionary<Guid, Customer>();
             repo.Add(_notExistingId, null);
             repo.Add(_existingId, customer);
 
 
-            customerRepository.Get(0).Returns(null as Customer);
+            customerRepository.Get(Guid.Empty).Returns(null as Customer);
             customerRepository.Get(customer.Id).Returns(repo[customer.Id]);
             customerRepository
                 .When(cr =>cr.UpdateAsync(Arg.Any<Customer>()))
                 .Do(callInfo =>
            {
                var callInfoCustomer = callInfo.Arg<Customer>();
-               if (callInfoCustomer.Id == 0)
+               if (callInfoCustomer.Id == Guid.Empty)
                {
                    while (!repo.TryAdd(callInfoCustomer.Id, callInfoCustomer))
                    {
-                       callInfoCustomer.Id = new Faker().Random.Number(0, int.MaxValue);
+                       callInfoCustomer.Id = new Faker().Random.Guid();
                    }
                }
                else
@@ -97,7 +99,7 @@ namespace Backend.API.Tests.Backend.API.CustomerManagement
         [Fact]
         public async Task WhenAddingAValidCustomer_ShouldReturnOK()
         {
-            var nonExistingCustomer = Generator.CustomerItemGenerator().Generate();
+            var nonExistingCustomer = ApiDtoGenerator.CustomerItemGenerator().Generate();
             nonExistingCustomer.Id = _notExistingId;
 
             var apiResult = await _sut.Post(nonExistingCustomer);
@@ -108,7 +110,7 @@ namespace Backend.API.Tests.Backend.API.CustomerManagement
         [Fact]
         public async Task WhenAddingContactInfoToNonExistingCustomer_ShouldReturnNotFound()
         {
-            var contactInfoItem = Generator.ContactInfoItemGenerator();
+            var contactInfoItem = ApiDtoGenerator.ContactInfoItemGenerator();
             var apiResult = await _sut.Put(_notExistingId, contactInfoItem);
             Assert.IsType<NotFoundResult>(apiResult.Result);
         }
@@ -123,7 +125,7 @@ namespace Backend.API.Tests.Backend.API.CustomerManagement
         [Fact]
         public async Task WhenAddingValidContactDataToACustomer_ItShouldReturnOIk()
         {
-            var contactInfoItem = Generator.ContactInfoItemGenerator();
+            var contactInfoItem = ApiDtoGenerator.ContactInfoItemGenerator();
 
             var apiResult = await _sut.Put(_existingId, contactInfoItem);
             Assert.IsType<OkResult>(apiResult.Result);
@@ -132,7 +134,7 @@ namespace Backend.API.Tests.Backend.API.CustomerManagement
         [Fact]
         public async Task WhenAddingDuplicateContactDataToACustomer_ItShouldReturnBadRequest()
         {
-            var contactInfoItem1 = Generator.ContactInfoItemGenerator().Generate();
+            var contactInfoItem1 = ApiDtoGenerator.ContactInfoItemGenerator().Generate();
 
             var apiResult1 = await _sut.Put(_existingId, contactInfoItem1);
             Assert.IsType<OkResult>(apiResult1.Result);

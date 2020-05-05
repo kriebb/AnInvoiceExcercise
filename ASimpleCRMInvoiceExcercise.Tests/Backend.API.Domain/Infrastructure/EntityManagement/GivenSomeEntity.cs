@@ -25,7 +25,7 @@ namespace Backend.API.Tests.Backend.API.Domain.Infrastructure.EntityManagement
         [Fact]
         public void WhenInstance1_Instance2_HaveSameId_ShouldBeEqual()
         {
-            var someId = new Faker().Random.Number(1,int.MaxValue);
+            var someId = new Faker().Random.Guid();
             _someEntity1.Id = someId;
             _someEntity2.Id = someId;
 
@@ -35,7 +35,7 @@ namespace Backend.API.Tests.Backend.API.Domain.Infrastructure.EntityManagement
         [Fact]
         public void WhenInstance1_Instance2_HaveBoth0_ShouldNotBeEqual()
         {
-            var someId = 0;
+            var someId = Guid.Empty;
             _someEntity1.Id = someId;
             _someEntity2.Id = someId;
 
@@ -45,11 +45,11 @@ namespace Backend.API.Tests.Backend.API.Domain.Infrastructure.EntityManagement
         [Fact]
         public void WhenInstance1_Instance2_HaveDifferentId_SameProperty_ShouldNotBeEqual()
         {
-            var someId = new Faker().Random.Number();
+            var someId = new Faker().Random.Guid();
             var alphanumeric = new Faker().Random.AlphaNumeric(10);
             _someEntity1.Id = someId;
             _someEntity1.SomeProperty = alphanumeric;
-            _someEntity2.Id = --someId;
+            _someEntity2.Id = new Faker().Random.Guid();
             _someEntity2.SomeProperty = alphanumeric;
 
             Assert.NotEqual(_someEntity1, _someEntity2);
@@ -58,9 +58,9 @@ namespace Backend.API.Tests.Backend.API.Domain.Infrastructure.EntityManagement
         [Fact]
         public void WhenInstance1_Instance2_HaveNotSameId_ShouldNotBeEqual()
         {
-            var someId = new Faker().Random.Number();
+            var someId = new Faker().Random.Guid();
             _someEntity1.Id = someId;
-            _someEntity2.Id = --someId;
+            _someEntity2.Id =  new Faker().Random.Guid();
 
             Assert.NotEqual(_someEntity1, _someEntity2);
         }

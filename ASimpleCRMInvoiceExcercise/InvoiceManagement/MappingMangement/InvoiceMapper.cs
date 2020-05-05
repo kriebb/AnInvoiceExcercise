@@ -4,7 +4,7 @@ using Backend.API.Dtos.InvoiceManagement;
 
 namespace Backend.API.InvoiceManagement.MappingMangement
 {
-    public class InvoiceMapper:Profile
+    public class InvoiceMapper : Profile
     {
         public InvoiceMapper()
         {

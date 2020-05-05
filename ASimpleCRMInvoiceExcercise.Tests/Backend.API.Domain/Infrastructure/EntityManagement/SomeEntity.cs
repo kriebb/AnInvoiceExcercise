@@ -1,4 +1,4 @@
-﻿using Backend.API.Domain.Infrastructure.EntityMangement;
+﻿using Backend.API.Domain.Infrastructure.EntityManagement;
 
 namespace Backend.API.Tests.Backend.API.Domain.Infrastructure.EntityManagement
 {

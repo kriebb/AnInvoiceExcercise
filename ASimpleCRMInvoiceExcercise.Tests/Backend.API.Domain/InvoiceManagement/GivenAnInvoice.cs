@@ -92,7 +92,7 @@ namespace Backend.API.Tests.Backend.API.Domain.InvoiceManagement
             public void RemoveAnInvoiceLIne()
             {
                 var invoiceLine = new InvoiceLine();
-                invoiceLine.Id = new Faker().Random.Number();
+                invoiceLine.Id = new Faker().Random.Guid();
 
                 _invoice.ClearInvoiceLines();
                 _invoice.AddInvoiceLine(invoiceLine);

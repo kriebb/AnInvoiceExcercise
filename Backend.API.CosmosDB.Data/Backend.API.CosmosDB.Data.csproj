@@ -15,5 +15,10 @@
     <ProjectReference Include="..\Backend.API.Infrastructure.Mappings\Backend.API.Infrastructure.Mappings.csproj" />
     <ProjectReference Include="..\Bakcend.API.Domain.Services\Backend.API.Domain.Services.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="DynamicProxyGenAssembly2"></InternalsVisibleTo>
+    <InternalsVisibleTo Include="Backend.API.CosmosDB.Data.Tests"></InternalsVisibleTo>
+
+  </ItemGroup>
 
 </Project>

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Backend.API.CosmosDB.Data.DataModels.CustomerManagement;
 using Backend.API.CosmosDB.Data.Services.Infrastructure;
 using Backend.API.Domain.Services.CustomerManagement;
@@ -33,10 +34,10 @@ namespace Backend.API.CosmosDB.Data.Services.CustomerManagement
             return domainCustomer;
         }
 
-        public Domain.CustomerManagement.Customer Get(long customerId)
+        public Domain.CustomerManagement.Customer Get(Guid CustomerId)
         {
-            var customerDocument = _genericRepo.GetById(customerId);
-            Domain.CustomerManagement.Customer domainCustomer = _domainCustomerMapper.Map(customerDocument);
+            var CustomerDocument = _genericRepo.GetById(CustomerId.ToString());
+            Domain.CustomerManagement.Customer domainCustomer = _domainCustomerMapper.Map(CustomerDocument);
 
             return domainCustomer;
 
@@ -46,9 +47,9 @@ namespace Backend.API.CosmosDB.Data.Services.CustomerManagement
         {
             DataModels.CustomerManagement.Customer dataCustomer = _dataModelCustomerMapper.Map(existingDomainCustomer);
 
-            var customerDocument = await _genericRepo.UpdateAsync(dataCustomer.Id, dataCustomer);
+            var CustomerDocument = await _genericRepo.UpdateAsync(dataCustomer.Id, dataCustomer);
 
-            Domain.CustomerManagement.Customer domainCustomer = _domainCustomerMapper.Map(customerDocument);
+            Domain.CustomerManagement.Customer domainCustomer = _domainCustomerMapper.Map(CustomerDocument);
 
             return domainCustomer;
         }

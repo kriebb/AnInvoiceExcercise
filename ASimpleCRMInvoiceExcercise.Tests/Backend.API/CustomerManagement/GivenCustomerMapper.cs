@@ -1,6 +1,7 @@
 ﻿using Backend.API.CustomerManagement.MappingMangement;
 using Backend.API.Domain.CustomerManagement;
 using Backend.API.Dtos.CustomerManagement;
+using Backend.API.Dtos.InvoiceManagement;
 using Backend.API.Infrastructure.Mappings;
 using Backend.API.Infrastructure.Mappings.BootstrapAutoMapper;
 using Bogus;
@@ -36,7 +37,7 @@ namespace Backend.API.Tests.Backend.API.CustomerManagement
             var item = new CustomerItem();
             item.FirstName = faker.Person.FirstName;
             item.LastName = faker.Person.LastName;
-            item.Id = faker.Random.Number(1,int.MaxValue);
+            item.Id = faker.Random.Guid();
 
             var entity = _sut.Map(item);
 

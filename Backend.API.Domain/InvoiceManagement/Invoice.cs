@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
 using Backend.API.Domain.CustomerManagement;
-using Backend.API.Domain.Infrastructure.EntityMangement;
+using Backend.API.Domain.Infrastructure.EntityManagement;
+using Backend.API.Domain.InvoiceManagement;
 
 namespace Backend.API.Domain.InvoiceManagement
 {

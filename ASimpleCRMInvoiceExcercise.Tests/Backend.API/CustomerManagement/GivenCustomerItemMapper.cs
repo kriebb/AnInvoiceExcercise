@@ -1,5 +1,7 @@
-﻿using Backend.API.Domain.CustomerManagement;
+﻿using Backend.API.Data.Generator;
+using Backend.API.Domain.CustomerManagement;
 using Backend.API.Dtos.CustomerManagement;
+using Backend.API.Dtos.InvoiceManagement;
 using Backend.API.Infrastructure.Mappings;
 using Backend.API.Infrastructure.Mappings.BootstrapAutoMapper;
 using Backend.API.Tests.Backend.API.InvoiceManagement;
@@ -33,7 +35,7 @@ namespace Backend.API.Tests.Backend.API.CustomerManagement
             var faker = new Faker();
 
 
-            var entity = Generator.CustomerGenerator().Generate();
+            var entity = DomainGenerator.CustomerGenerator().Generate();
 
             var item = _sut.Map(entity);
 

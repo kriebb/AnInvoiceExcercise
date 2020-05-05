@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Backend.API.Domain.CommonManagement;
-using Backend.API.Domain.Infrastructure.EntityMangement;
+using Backend.API.Domain.Infrastructure.EntityManagement;
 
 namespace Backend.API.Domain.CustomerManagement
 {

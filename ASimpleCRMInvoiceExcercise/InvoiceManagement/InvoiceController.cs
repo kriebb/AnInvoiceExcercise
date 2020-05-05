@@ -52,7 +52,7 @@ namespace Backend.API.InvoiceManagement
 
         // PUT: api/Invoice/5 - Een status te updaten van een factuur  
         [HttpPut("{id}")]
-        public async Task<ActionResult<InvoiceItem>> Put(long id, [FromBody] string invoiceState)
+        public async Task<ActionResult<InvoiceItem>> Put(Guid id, [FromBody] string invoiceState)
         {
             try
             {

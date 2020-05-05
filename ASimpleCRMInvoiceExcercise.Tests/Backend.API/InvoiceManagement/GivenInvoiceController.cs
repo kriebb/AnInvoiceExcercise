@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AutoFixture;
 using AutoFixture.AutoNSubstitute;
 using Backend.API.CustomerManagement;
+using Backend.API.Data.Generator;
 using Backend.API.Domain.CustomerManagement;
 using Backend.API.Domain.InvoiceManagement;
 using Backend.API.Domain.Services.CustomerManagement;
@@ -32,8 +33,8 @@ namespace Backend.API.Tests.Backend.API.InvoiceManagement
     public class GivenInvoiceController
     {
         private InvoiceController _sut;
-        private long _notExistingId;
-        private long _existingId;
+        private Guid _notExistingId;
+        private Guid _existingId;
         private IInvoiceRepository _invoiceRepository;
 
         public GivenInvoiceController()
@@ -58,7 +59,7 @@ namespace Backend.API.Tests.Backend.API.InvoiceManagement
         [Fact]
         public async Task AddingAnInvoice_ShouldBeSaved()
         {
-            var invoiceItem = Generator.InvoiceItemGenerator().Generate();
+            var invoiceItem = ApiDtoGenerator.InvoiceItemGenerator().Generate();
             var apiResult = await _sut.Post(invoiceItem);
 
             using (new AssertionScope())
@@ -78,7 +79,7 @@ namespace Backend.API.Tests.Backend.API.InvoiceManagement
         [Fact]
         public async Task UpdatingAnInvoiceState_ShouldBeAddedToTheSummary()
         {
-            var invoice = Generator.InvoiceGenerator().Generate();
+            var invoice = DomainGenerator.InvoiceGenerator().Generate();
             _invoiceRepository.Get(invoice.Id).Returns(invoice);
 
             var apiResult = await _sut.Put(invoice.Id, "someState");
@@ -93,7 +94,7 @@ namespace Backend.API.Tests.Backend.API.InvoiceManagement
         [InlineData(null), InlineData(" "), InlineData("")]
         public async Task UpdatingAnInvoiceStateAsNull_StringEmpty_WhiteSpace_ShouldReturnBadRequest(string emptyStatus)
         {
-            var invoice = Generator.InvoiceGenerator().Generate();
+            var invoice = DomainGenerator.InvoiceGenerator().Generate();
             _invoiceRepository.Get(invoice.Id).Returns(invoice);
 
             var apiResult = await _sut.Put(invoice.Id, emptyStatus);

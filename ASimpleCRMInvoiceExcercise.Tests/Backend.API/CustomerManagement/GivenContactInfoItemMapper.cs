@@ -1,4 +1,5 @@
-﻿using Backend.API.Domain.CustomerManagement;
+﻿using Backend.API.Data.Generator;
+using Backend.API.Domain.CustomerManagement;
 using Backend.API.Dtos.CustomerManagement;
 using Backend.API.Infrastructure.Mappings;
 using Backend.API.Infrastructure.Mappings.BootstrapAutoMapper;
@@ -29,7 +30,7 @@ namespace Backend.API.Tests.Backend.API.CustomerManagement
         [Fact]
         public void WhenMap_Dto_To_Entity_ShouldAllPropertiesMapped()
         {
-            var faker = Generator.ContactInfoItemGenerator();
+            var faker = ApiDtoGenerator.ContactInfoItemGenerator();
 
             var item = faker.Generate();
 

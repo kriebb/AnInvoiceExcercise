@@ -1,4 +1,5 @@
-﻿using Backend.API.Domain.InvoiceManagement;
+﻿using Backend.API.Data.Generator;
+using Backend.API.Domain.InvoiceManagement;
 using Backend.API.Dtos.InvoiceManagement;
 using Backend.API.Infrastructure.Mappings;
 using Backend.API.Infrastructure.Mappings.BootstrapAutoMapper;
@@ -28,7 +29,7 @@ namespace Backend.API.Tests.Backend.API.InvoiceManagement
         [Fact]
         public void WhenMapFromInvoice_To_InvoiceDto_AllPropertiesShouldBeMapped()
         {
-            var item = Generator.InvoiceItemGenerator().Generate();
+            var item = ApiDtoGenerator.InvoiceItemGenerator().Generate();
             var entity = _sut.Map(item);
 
             using (new AssertionScope())

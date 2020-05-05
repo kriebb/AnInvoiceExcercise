@@ -15,7 +15,7 @@ namespace Backend.API.CosmosDB.Data.Services.Infrastructure
             {
                 var cosmosDbConfig = new CosmosDbConfig();
                 var configuration = context.Resolve<IConfiguration>();
-                configuration.Bind(cosmosDbConfig);
+                configuration.GetSection(nameof(CosmosDbConfig)).Bind(cosmosDbConfig);
                 return cosmosDbConfig;
             });
         }

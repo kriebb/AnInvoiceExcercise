@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Backend.API.CosmosDB.Data.DataModels.InvoiceManagement;
 using Backend.API.CosmosDB.Data.Services.Infrastructure;
 using Backend.API.Domain.Services.InvoiceManagement;
@@ -33,9 +34,9 @@ namespace Backend.API.CosmosDB.Data.Services.InvoiceManagement
             return domainInvoice;
         }
 
-        public Domain.InvoiceManagement.Invoice Get(long invoiceId)
+        public Domain.InvoiceManagement.Invoice Get(Guid invoiceId)
         {
-            var invoiceDocument = _genericRepo.GetById(invoiceId);
+            var invoiceDocument = _genericRepo.GetById(invoiceId.ToString());
             Domain.InvoiceManagement.Invoice domainInvoice = _domainInvoiceMapper.Map(invoiceDocument);
 
             return domainInvoice;

@@ -6,6 +6,7 @@ using Backend.API.Domain.Services;
 using Backend.API.Domain.Services.CustomerManagement;
 using Backend.API.Dtos;
 using Backend.API.Dtos.CustomerManagement;
+using Backend.API.Dtos.InvoiceManagement;
 using Backend.API.ErrorManagement;
 using Backend.API.Infrastructure.Mappings;
 using Microsoft.AspNetCore.Mvc;
@@ -59,7 +60,7 @@ namespace Backend.API.CustomerManagement
         // POST: api/Customer - Een contactgegeven (email/telefoon) toe te wijzen aan een klant
 
         [HttpPut]
-        public async Task<ActionResult<CustomerItem>> Put(long customerId, [FromBody] ContactInfoItem value)
+        public async Task<ActionResult<CustomerItem>> Put(Guid customerId, [FromBody] ContactInfoItem value)
         {
             try
             {

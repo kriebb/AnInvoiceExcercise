@@ -23,7 +23,18 @@ namespace Backend.API.Infrastructure.Mappings.BootstrapAutoMapper
         private Assembly[] GetAllAssemblies()
         {
             var path = AppDomain.CurrentDomain.BaseDirectory;
-            return Directory.GetFiles(path, "*.dll").Select(Assembly.LoadFrom).ToArray();
+            return Directory.GetFiles(path, "*.dll").Select((s, i) =>
+            {
+                try
+                {
+                    return Assembly.LoadFrom(s);
+                }
+                catch (Exception e)
+                {
+                    return null;
+                }
+
+            }).Where(x => x != null).ToArray();
         }
 
         private MapperConfiguration GetMapperConfiguration(MapperConfigurationExpression mce)
