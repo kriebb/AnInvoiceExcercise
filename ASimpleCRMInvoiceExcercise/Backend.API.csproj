@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>b3b7e815-8046-4b95-9291-50eba883c85a</UserSecretsId>
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Backend.API.CosmosDB.Data\Backend.API.CosmosDB.Data.csproj" />
     <ProjectReference Include="..\Backend.API.Domain\Backend.API.Domain.csproj" />
     <ProjectReference Include="..\Backend.API.Dtos\Backend.API.Dtos.csproj" />
     <ProjectReference Include="..\Backend.API.Infrastructure.Mappings\Backend.API.Infrastructure.Mappings.csproj" />

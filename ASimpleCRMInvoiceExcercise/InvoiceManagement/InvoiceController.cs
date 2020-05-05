@@ -32,6 +32,7 @@ namespace Backend.API.InvoiceManagement
 
         // POST: api/Invoice - Een factuur met factuurlijnen te maken
         [HttpPost]
+        [Route("", Name="CreateInvoice")]
         public async Task<ActionResult<InvoiceItem>> Post([FromBody] InvoiceItem value)
         {
             try
@@ -40,9 +41,9 @@ namespace Backend.API.InvoiceManagement
                     return new BadRequestResult();
 
                 var newInvoice = _invoiceMapper.Map(value);
-                await _invoiceRepository.AddAsync(newInvoice);
-
-                return CreatedAtAction(nameof(InvoiceItem), new { id = newInvoice.Id }, value);
+                var updatedInvoice = await _invoiceRepository.AddAsync(newInvoice);
+                var createdInvoiceItem = _invoiceItemMapper.Map(updatedInvoice);
+                return new OkObjectResult(createdInvoiceItem);
             }
             catch (Exception e) //TODO middleware            
             {
@@ -51,7 +52,7 @@ namespace Backend.API.InvoiceManagement
         }
 
         // PUT: api/Invoice/5 - Een status te updaten van een factuur  
-        [HttpPut("{id}")]
+        [HttpPut("{id}",Name="InvoiceStateChange")]
         public async Task<ActionResult<InvoiceItem>> Put(Guid id, [FromBody] string invoiceState)
         {
             try
@@ -63,9 +64,9 @@ namespace Backend.API.InvoiceManagement
                 var invoice =  _invoiceRepository.Get(id);
                 invoice.Summary += "State Added: " + invoiceState + System.Environment.NewLine;
 
-                await _invoiceRepository.UpdateAsync(invoice);
+                var updatedInvoice = await _invoiceRepository.UpdateAsync(invoice);
 
-                var invoiceItem = _invoiceItemMapper.Map(invoice);
+                var invoiceItem = _invoiceItemMapper.Map(updatedInvoice);
 
                 return new OkObjectResult(invoiceItem);
             }

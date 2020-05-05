@@ -10,7 +10,7 @@ namespace Backend.API.CosmosDB.Data.Services.Infrastructure
         protected override void Load(ContainerBuilder builder)
         {
 
-            builder.RegisterType(typeof(DocumentDbRepository<>)).As(typeof(IDocumentDbRepository<>));
+            builder.RegisterGeneric(typeof(DocumentDbRepository<>)).As(typeof(IDocumentDbRepository<>));
             builder.Register<CosmosDbConfig>((context, parameters) =>
             {
                 var cosmosDbConfig = new CosmosDbConfig();

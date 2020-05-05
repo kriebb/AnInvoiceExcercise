@@ -4,7 +4,7 @@ using Backend.API.Infrastructure.Mappings.Impl;
 
 namespace Backend.API.Infrastructure.Mappings
 {
-    public class ConfigureDependencyContainer : Module, IConfigureDependencyContainer
+    internal class ConfigureDependencyContainer : Module, IConfigureDependencyContainer
     {
         protected override void Load(ContainerBuilder builder)
         {

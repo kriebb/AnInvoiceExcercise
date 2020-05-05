@@ -38,6 +38,7 @@ namespace Backend.API.CustomerManagement
 
 
         // POST: api/Customer - Klanten aan te maken
+        [Route("", Name = "CreateCustomer")]
         [HttpPost]
         public async Task<ActionResult<CustomerItem>> Post([FromBody] CustomerItem value)
         {
@@ -49,7 +50,7 @@ namespace Backend.API.CustomerManagement
                 var newCustomer = _customerMapper.Map(value);
                 await _customerRepository.AddAsync(newCustomer);
 
-                return CreatedAtAction(nameof(CustomerItem), new { id = newCustomer.Id }, value);
+                return new OkObjectResult(newCustomer.Id);
             }
             catch (Exception e) //TODO middleware            
             {
@@ -60,6 +61,7 @@ namespace Backend.API.CustomerManagement
         // POST: api/Customer - Een contactgegeven (email/telefoon) toe te wijzen aan een klant
 
         [HttpPut]
+        [Route("{customerId}", Name = "AddContactToCustomer")]
         public async Task<ActionResult<CustomerItem>> Put(Guid customerId, [FromBody] ContactInfoItem value)
         {
             try

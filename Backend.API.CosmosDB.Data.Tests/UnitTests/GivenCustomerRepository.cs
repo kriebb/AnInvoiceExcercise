@@ -57,5 +57,6 @@ namespace Backend.API.CosmosDB.Data.Tests.UnitTests
             await _genericRepo.Received().UpdateAsync(Arg.Is<string>(newCustomer.Id.ToString()), Arg.Any<Customer>());
 
         }
+
     }
 }

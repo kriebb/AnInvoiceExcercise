@@ -103,7 +103,7 @@ namespace Backend.API.Tests.Backend.API.CustomerManagement
             nonExistingCustomer.Id = _notExistingId;
 
             var apiResult = await _sut.Post(nonExistingCustomer);
-            Assert.IsType<CreatedAtActionResult>(apiResult.Result);
+            Assert.IsType<OkObjectResult>(apiResult.Result);
 
         }
 

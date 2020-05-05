@@ -8,7 +8,8 @@ using Newtonsoft.Json;
 namespace Backend.API.CosmosDB.Data.DataModels.InvoiceManagement
 {
     internal class Invoice:Document
-    {        [JsonProperty]
+    {        
+        [JsonProperty]
         public string Summary { get; set; }
         [JsonProperty]
         public DateTime Date { get; set; }

@@ -8,7 +8,7 @@ namespace Backend.API.Infrastructure.Mappings.AutoFacExtensions
 {
     public static class ContainerBuilderExtensions
     {
-        public static void RegisterAutoMapper(this ContainerBuilder builder, params Assembly[] assemblies)
+        public static void RegisterAutoMapper(this ContainerBuilder builder, Assembly[] assemblies)
         {
             var assemblyTypes = assemblies.SelectMany(x => x.GetTypes());
 

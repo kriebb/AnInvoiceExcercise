@@ -1,4 +1,6 @@
 ﻿using Autofac;
+
+using Backend.API.Domain.Services.InvoiceManagement;
 using Backend.API.Infrastructure.DI;
 
 namespace Backend.API.CosmosDB.Data.Services.InvoiceManagement
@@ -7,7 +9,7 @@ namespace Backend.API.CosmosDB.Data.Services.InvoiceManagement
     {
         protected override void Load(ContainerBuilder builder)
         {
-            
+            builder.RegisterType<InvoiceRepository>().As<IInvoiceRepository>();
         }
     }
 }

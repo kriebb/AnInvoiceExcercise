@@ -64,7 +64,7 @@ namespace Backend.API.Tests.Backend.API.InvoiceManagement
 
             using (new AssertionScope())
             {
-                apiResult.Result.Should().BeOfType<CreatedAtActionResult>();
+                apiResult.Result.Should().BeOfType<OkObjectResult>();
 
                 await _invoiceRepository.Received(1).AddAsync(Arg.Any<Invoice>());
             }
